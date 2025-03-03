@@ -38,7 +38,7 @@ function App() {
     return (
       <><UserProvider><BrowserRouter>  {/* Wrap your Routes with BrowserRouter */}
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
           <Route path="/AdminDashboard" element={<AdminDashboard />} />
           <Route path="/Employees" element={<Employees />} />
           <Route path="/Adminnewemployee" element={<Adminnewemployee />} />

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import profile from "../src/profile-removebg-preview.png";
 import Navbar from "../src/Navbar";
 import "./styles.css";
 import Calendar from "./Calendars.jsx";
@@ -11,6 +10,11 @@ import { blueGrey } from "@mui/material/colors";
 
 
 const Home = () => {
+
+  const [userData, setUserData] = useState(null);
+  const [setImageUrl] = useState("");
+    const [userId] = useState(sessionStorage.getItem("userId"));
+
   const [ setIsTrainingDropdownOpen] = useState(false);
   const [ setIsLeaveDropdownOpen] = useState(false);
   const [setIsResignationDropdownOpen] = useState(false);
@@ -18,6 +22,23 @@ const Home = () => {
   const leaveDropdownRef = useRef(null);
   const trainingDropdownRef = useRef(null);
   const resignationDropdownRef = useRef(null);
+
+  useEffect(() => {
+    // **Step 1: Fetch logged-in user details from API**
+    fetch("http://192.168.90.106:3012/api/hr/personaldetails?ADM=208010")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data && data.ADM) {
+          setUserData(data);
+          
+          // **Step 2: Fetch user image dynamically**
+          setImageUrl(`http://192.168.90.106:3012/api/hr/image?ADM=${data.ADM}`);
+        } else {
+          console.error("Invalid response: Missing employee ID (ADM)");
+        }
+      })
+      .catch((error) => console.error("Error fetching user data:", error));
+  }, );
 
   const handleClickOutside = (event) => {
     if (leaveDropdownRef.current && !leaveDropdownRef.current.contains(event.target)) {
@@ -43,14 +64,15 @@ const Home = () => {
       {/* Sidebar card */}
      
       <Card className="profile-card" style={{ backgroundColor: blueGrey[500], color: "white" }}> 
-        <CardMedia className="profile-image" component="img" image={profile} alt="Profile"  />
+        <CardMedia className="profile-image" component="img"  image= {`http://192.168.90.106:3012/api/hr/image?ADM=${userId}`}// Fallback if image fails
+          alt="Profile"  />
         <CardContent style={{marginBottom:"600px"}}>
           <Typography variant="h5" component="div" align="center">
             User Profile
           </Typography>
-          <span>NAME</span><br></br>
-        <span>EMPLOYEE ID</span><br></br>
-        <span>DESIGNATION</span>
+          <span>{userData?.name || "NAME"}</span><br />
+          <span>{userData?.ADM || "EMPLOYEE ID"}</span><br />
+          <span>{userData?.designation || "DESIGNATION"}</span>
         </CardContent>
       </Card>
       

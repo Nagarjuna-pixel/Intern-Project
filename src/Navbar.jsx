@@ -97,7 +97,7 @@ console.log(userId,userName)
     </Typography>
     <Tooltip title="Open settings">
       <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-        <Avatar alt={userName} src="/static/images/avatar/1.jpg" />
+      <Avatar alt={userName} src={`http://192.168.90.106:3012/api/hr/image?ADM=${userId}`} />
       </IconButton>
     </Tooltip>
     <Menu
