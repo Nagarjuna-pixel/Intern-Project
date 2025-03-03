@@ -1,0 +1,111 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.LOGIN {
+  max-height: 100%;
+  max-width: 100%;
+  width: 100%;
+  height: 100vh;
+  max-height: 100%;
+}
+.LOGIN .LOGIN_WHOLE {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+}
+.LOGIN .LOGIN_WHOLE .LOGIN_img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+}
+.LOGIN .LOGIN_WHOLE .LOGIN_INNER1 {
+  border-radius: 20px 0px 0px 20px;
+  height: 100%;
+  width: 65%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+.LOGIN .LOGIN_WHOLE .load_spinner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.LOGIN .LOGIN_WHOLE .LOGIN_INNER2 {
+  border-radius: 20px;
+  height: 530px;
+  width: 26%;
+  background-color: white;
+  z-index: 2;
+}
+.LOGIN .LOGIN_WHOLE .LOGIN_INNER2 .LoginTitle {
+  width: 99%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.LOGIN .LOGIN_WHOLE .LOGIN_INNER2 .LoginTitle h5 {
+  text-align: center;
+  color: #b32c3b;
+}
+.LOGIN .LOGIN_WHOLE .LOGIN_INNER2 .LoginTitle .LOGIN_tit_img {
+  width: 135px;
+}
+.LOGIN .LOGIN_WHOLE .LOGIN_INNER2 .login_content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.LOGIN .LOGIN_WHOLE .LOGIN_INNER2 .login_content .login_content_f {
+  position: relative;
+  top: 14px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media all and (max-width: 1100px) {
+  .LOGIN .LOGIN_WHOLE .LOGIN_INNER2 {
+    width: 30%;
+  }
+}
+@media all and (max-width: 992px) {
+  .LOGIN {
+    padding: 10px;
+  }
+  .LOGIN .LOGIN_img {
+    display: none;
+  }
+  .LOGIN .LOGIN_WHOLE .LOGIN_INNER1 {
+    display: none;
+  }
+  .LOGIN .LOGIN_WHOLE .LOGIN_INNER2 {
+    width: 60%;
+  }
+}
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  font-size: 18px;
+  border-radius: 10px; /* Add border radius to button */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}

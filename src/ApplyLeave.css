@@ -1,0 +1,65 @@
+.leave-form-container {
+    flex-grow: 1;
+    margin-left: 60px; 
+    margin-top:40px;
+    padding: 30px;
+    width: 750px;
+    background-color:#f1a8a8;
+    border-radius: 10px;
+  }
+
+  .leave-form-container label {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  .leave-form-container input,
+  .leave-form-container select,
+  .leave-form-container textarea {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 15px 0;
+    border: 1px solid #ccc;
+  }
+  
+  .leave-form-container button {
+    padding: 10px 30px;
+    background: linear-gradient(to right, #f64d75, #ff4949);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out; /* Smooth transition */
+    border-radius: 5px;
+    margin-left: 300px;
+  }
+  
+  .leave-form-container button:hover {
+    background: linear-gradient(to right, #f50039, #ee0000); /* Corrected hover effect */
+  }
+
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 100px; /* Adds spacing between fields */
+  }
+  
+  .form-group {
+    flex: 1; /* Ensures equal width for both fields */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .leave-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 600px;
+    width:450px;
+    padding: 15px;
+    margin-right: 1150px;
+    margin-left:50px;
+    margin-top:100px;
+    border-radius:20px;
+  }
