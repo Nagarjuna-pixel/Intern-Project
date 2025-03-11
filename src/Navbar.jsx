@@ -3,6 +3,7 @@
 import React, { useState,} from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { useUser } from './contexts/UserContext'; // Import useUser hook
+import "./UserNavbar.css";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import { Toolbar } from '@mui/material';
@@ -108,7 +109,6 @@ console.log(userId,userName)
     >
       <MenuItem onClick={() => navigate('/profile')}>Profile</MenuItem>
       <MenuItem onClick={() => navigate('/account')}>Account</MenuItem>
-      <MenuItem onClick={() => navigate('/Home')}>Dashboard</MenuItem>
       <MenuItem onClick={() => navigate('/login')}>Logout</MenuItem>
     </Menu>
   </>
@@ -122,3 +122,4 @@ console.log(userId,userName)
 }
 
 export default Navbar;
+

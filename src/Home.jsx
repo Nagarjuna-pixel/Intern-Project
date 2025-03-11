@@ -8,6 +8,8 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { Typography } from '@mui/material';
 import { blueGrey } from "@mui/material/colors";
+// import CardActionArea from '@mui/material/CardActionArea';
+// import Box from '@mui/material/Box';
 
 
 const Home = () => {
@@ -15,9 +17,24 @@ const Home = () => {
   const [ setIsLeaveDropdownOpen] = useState(false);
   const [setIsResignationDropdownOpen] = useState(false);
 
+const [userId] = useState(sessionStorage.getItem("userId"));
+  const [userName] = useState(sessionStorage.getItem("userName"));
+
+
   const leaveDropdownRef = useRef(null);
   const trainingDropdownRef = useRef(null);
   const resignationDropdownRef = useRef(null);
+
+  // const [selectedCard, setSelectedCard] = React.useState(null);
+  // const cards = [
+  //   {
+  //     id: 1,
+  //     name: 'John Doe', // Replace with dynamic data if needed
+  //     employeeId: 'EMP1234',
+  //     designation: 'Software Engineer',
+  //     image: profile, // Profile image
+  //   },
+  // ];
 
   const handleClickOutside = (event) => {
     if (leaveDropdownRef.current && !leaveDropdownRef.current.contains(event.target)) {
@@ -42,20 +59,19 @@ const Home = () => {
 
       {/* Sidebar card */}
      
-      <Card className="profile-card" style={{ backgroundColor: blueGrey[500], color: "white" }}> 
+       <Card className="profile-card" style={{ backgroundColor: blueGrey[500], color: "white" }}> 
         <CardMedia className="profile-image" component="img" image={profile} alt="Profile"  />
         <CardContent style={{marginBottom:"600px"}}>
           <Typography variant="h5" component="div" align="center">
             User Profile
           </Typography>
-          <span>NAME</span><br></br>
-        <span>EMPLOYEE ID</span><br></br>
-        <span>DESIGNATION</span>
+          <span style={{marginLeft:"120px"}}> NAME&nbsp;:&nbsp;{userName}</span><br></br>
+        <span style={{marginLeft:"120px"}}>EMPLOYEEID&nbsp;:&nbsp;{userId}</span><br></br>
+        <span style={{marginLeft:"120px"}}>DESIGNATION&nbsp;:&nbsp;</span>
         </CardContent>
       </Card>
-      
+       
 
-      {/* Main content */}
       <div className="content">
         <Calendar />
       </div>

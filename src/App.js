@@ -29,6 +29,8 @@ import TrainingFeedback from "./TrainingFeedback";
 import Usertrainingfeedbackhistory from "./Usertrainingfeedbackhistory";
 import Adminnewemployee from "./Adminnewemployee";
 import AdminPosttraininghistory from "./AdminPosttraininghistory";
+import AdminPostupcomingtraining from "./AdminPostupcomingtraining";
+import AdminQuestionscreatingfeedback from "./AdminQuestionscreatingfeedback";
 import Login from "./Login";
 import "@mobiscroll/react/dist/css/mobiscroll.min.css";
 
@@ -38,7 +40,7 @@ function App() {
     return (
       <><UserProvider><BrowserRouter>  {/* Wrap your Routes with BrowserRouter */}
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
           <Route path="/AdminDashboard" element={<AdminDashboard />} />
           <Route path="/Employees" element={<Employees />} />
           <Route path="/Adminnewemployee" element={<Adminnewemployee />} />
@@ -48,12 +50,14 @@ function App() {
           <Route path="/Adminleavehistory" element={<Adminleavehistory />} />
           <Route path="/Admintrainingattendance" element={<Admintrainingattendance />} />
           <Route path="/Admintrainingfeedback" element={<Admintrainingfeedback />} />
+          <Route path="/AdminQuestionscreatingfeedback" element={<AdminQuestionscreatingfeedback />} />
           <Route path="/Admintrainingfeedbackhistory" element={<Admintrainingfeedbackhistory />} />
           <Route path="/Adminapplyresignation" element={<Adminapplyresignation />} />
           <Route path="/Adminresignationrequest" element={<Adminresignationrequest/>} />
           <Route path="/Admintrainingschedule" element={<Admintrainingschedule />} />
           <Route path="/Admintrainingscheduledetails" element={<Admintrainingscheduledetails />} />
           <Route path="/AdminPosttraining" element={<AdminPosttraining />} />
+          <Route path="/AdminPostupcomingtraining" element={<AdminPostupcomingtraining />} />
           <Route path="/AdminPosttraininghistory" element={<AdminPosttraininghistory />} />
           <Route path="/Adminresignationhistory" element={<AdminResignationhistory />} />
           <Route path="/home" element={<Home />} />

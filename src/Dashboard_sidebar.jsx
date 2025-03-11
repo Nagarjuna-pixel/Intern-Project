@@ -46,6 +46,7 @@ const Dashboard_Sidebar = () => {
         { key: "/Admintrainingschedule", label: "Training Schedule" },
         { key: "/Admintrainingattendance", label: "Training Attendance History" },
         { key: "/Admintrainingfeedback", label: "Training Feedback" },
+        { key: "/AdminQuestionscreatingfeedback", label: "Training Questions Feedback" },
       ],
     },
     {

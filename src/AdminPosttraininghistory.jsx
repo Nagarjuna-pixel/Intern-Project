@@ -1,16 +1,9 @@
-import { useState, } from 'react';
+import { useState, useEffect } from 'react';
 import * as React from 'react';
-import './AdminDashboard.css'; // Create a separate CSS file for styling
+import './AdminDashboard.css';
 import Dashboardsidebar from './Dashboard_sidebar.jsx';
 import AdminNavbar from './AdminNavbar.jsx';
-import { styled, /*createTheme*/ } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-// import dayjs from 'dayjs';
-// import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-// import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-// import {Grid, FormLabel, OutlinedInput, Select, MenuItem, Button, styled, ThemeProvider, createTheme, } from "@mui/material";
+import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -20,20 +13,36 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-// import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 function AdminPosttraininghistory() {
-//   const darkTheme = createTheme({
-//     palette: {
-//       mode: "dark",
-//       background: { default: "#121212", paper: "#1e1e1e" },
-//       text: { primary: "#ffffff" },
-//     },
-//   });
-
-//   const navigate = useNavigate();
-
   const [searchQuery, setSearchQuery] = useState("");
+  const [trainingHistory, setTrainingHistory] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchTrainingHistory = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('/training-history');
+        
+        if (response.data.success) {
+          setTrainingHistory(response.data.data);
+        } else {
+          throw new Error(response.data.error || 'Failed to fetch training history');
+        }
+        
+        setLoading(false);
+      } catch (err) {
+        setError(err.message || 'Error fetching training history');
+        setLoading(false);
+        console.error('Error fetching training history:', err);
+      }
+    };
+
+    fetchTrainingHistory();
+  }, []);
 
   const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -98,28 +107,18 @@ function AdminPosttraininghistory() {
     },
   }));
 
-  function createData(Training_Type,  Trainer_Name, designation, department, Date, time, venue) {
-    return { Training_Type, Trainer_Name, Date, designation, department,  time, venue};
-  }
-
-  const rows = [
-    createData('Surgical operations', 'Anthonydas','Surgical','Heart Surgery','18-02-25', '9.00AM', 'B-block' ),
-    createData( 'Eliminate Firing', 'Harolddas','Firing', 'Fire Extinguishing', '17-02-25', '11.00AM', 'A-block'),
-  ];
-
-  const filteredRows = rows.filter(row => 
+  const filteredRows = trainingHistory.filter(row => 
     Object.values(row).some(value => 
-      value.toString().toLowerCase().includes(searchQuery.toLowerCase())
+      value && value.toString().toLowerCase().includes(searchQuery.toLowerCase())
     )
   );
 
-
   return (
     <>
-   <Dashboardsidebar/> 
-   <AdminNavbar/>
-   <div style={{ padding: "100px", marginLeft: "200px", paddingTop: "100px" }}>
-        <h2 style={{ textAlign: "center", color: "#ec2e2e" }}>Post Training History</h2>
+      <Dashboardsidebar/> 
+      <AdminNavbar/>
+      <div style={{ padding: "100px", marginLeft: "200px", paddingTop: "100px" }}>
+        <h2 style={{ textAlign: "center", color: "#ec2e2e" }}>NABH Training History</h2>
         <br /><br />
         <Search style={{ width:"200px", marginLeft:"1000px", marginTop:"-30px", borderColor:"black" }}>
           <SearchIconWrapper>
@@ -133,50 +132,57 @@ function AdminPosttraininghistory() {
           />
         </Search>
         <br /><br />
-        <TableContainer component={Paper} style={{ width: "100%", overflowX: "auto" }}>
-          <Table sx={{ minWidth: 900 }} stickyHeader aria-label="customized table">
-            <TableHead>
-              <TableRow>
-                
-                <StyledTableCell>Training Topic</StyledTableCell>
-                <StyledTableCell>Trainer Name</StyledTableCell>
-                <StyledTableCell>Designation</StyledTableCell>
-                <StyledTableCell>Departments</StyledTableCell>
-                <StyledTableCell>Date</StyledTableCell>
-                <StyledTableCell>Time</StyledTableCell>
-                <StyledTableCell>Venue</StyledTableCell>
-                <StyledTableCell>Cancel</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {filteredRows.length > 0 ? (
-                filteredRows.map((row, index) => (
-                  <StyledTableRow key={index}>
-                    
-                    <StyledTableCell>{row.Training_Type}</StyledTableCell>
-                    <StyledTableCell>{row.Trainer_Name}</StyledTableCell>
-                    <StyledTableCell>{row.designation}</StyledTableCell>
-                    <StyledTableCell>{row.department}</StyledTableCell>
-                    <StyledTableCell>{row.Date}</StyledTableCell>
-                    <StyledTableCell>{row.time}</StyledTableCell>
-                    <StyledTableCell>{row.venue}</StyledTableCell>
-                    <StyledTableCell>
-                      <Button variant="contained" color="error">
-                        Cancel
-                      </Button>
-                    </StyledTableCell>
+        
+        {loading ? (
+          <div style={{ textAlign: 'center' }}>Loading training history...</div>
+        ) : error ? (
+          <div style={{ textAlign: 'center', color: 'red' }}>{error}</div>
+        ) : (
+          <TableContainer component={Paper} style={{ width: "100%", overflowX: "auto" }}>
+            <Table sx={{ minWidth: 900 }} stickyHeader aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>Session No</StyledTableCell>
+                  <StyledTableCell>Training Topic</StyledTableCell>
+                  <StyledTableCell>Category</StyledTableCell>
+                  <StyledTableCell>Department</StyledTableCell>
+                  <StyledTableCell>Designation</StyledTableCell>
+                  <StyledTableCell>Trainer Name</StyledTableCell>
+                  <StyledTableCell>Training Type</StyledTableCell>
+                  <StyledTableCell>Time</StyledTableCell>
+                  <StyledTableCell>Venue</StyledTableCell>
+                  <StyledTableCell>Date</StyledTableCell>
+                  <StyledTableCell>Participants</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {filteredRows.length > 0 ? (
+                  filteredRows.map((row, index) => (
+                    <StyledTableRow key={index}>
+                      <StyledTableCell>{row.TRAININGSESSIONNO}</StyledTableCell>
+                      <StyledTableCell>{row.TOPICNAME}</StyledTableCell>
+                      <StyledTableCell>{row.CATEGORY}</StyledTableCell>
+                      <StyledTableCell>{row.DEPARTMENT}</StyledTableCell>
+                      <StyledTableCell>{row.DESIGNATION}</StyledTableCell>
+                      <StyledTableCell>{row.TRAINERNAME}</StyledTableCell>
+                      <StyledTableCell>{row.TRAININGTYPE}</StyledTableCell>
+                      <StyledTableCell>{`${row.FROM_TRAINING_TIME} - ${row.TO_TRAINING_TIME}`}</StyledTableCell>
+                      <StyledTableCell>{row.VENUE}</StyledTableCell>
+                      <StyledTableCell>{row.FORMATTED_DATE}</StyledTableCell>
+                      <StyledTableCell>{row.PARTICIPANTS}</StyledTableCell>
+                    </StyledTableRow>
+                  ))
+                ) : (
+                  <StyledTableRow>
+                    <StyledTableCell colSpan={11} style={{ textAlign: 'center' }}>No results found</StyledTableCell>
                   </StyledTableRow>
-                ))
-              ) : (
-                <StyledTableRow>
-                  <StyledTableCell colSpan={8} style={{ textAlign: 'center' }}>No results found</StyledTableCell>
-                </StyledTableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
       </div>
-   </>
+    </>
   );
 }
 

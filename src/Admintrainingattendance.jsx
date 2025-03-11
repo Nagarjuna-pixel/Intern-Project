@@ -79,14 +79,15 @@ function Admintrainingattendance() {
     },
   }));
 
-  function createData(Employee_Id, Name, Department, Position, Email_ID, Attendance, Date, Category) {
-    return { Employee_Id, Name, Department, Position, Email_ID, Attendance, Date, Category};
+  function createData(Employee_Id, Name, Department,  Attendance, Date, ) {
+    return { Employee_Id, Name, Department,  Attendance, Date,};
   }
 
   const rows = [
-    createData('John Doe', '01-01-2025', '31-12-2025', 'Medical_Documents.pdf', 'Medical Leave', 'Absent', 'N/A', 'Nursing'),
-    createData('Jane Smith', '05-02-2025', '10-02-2025', 'Leave_Request.pdf', 'Casual Leave', 'Approved', 'Urgent', 'Firing'),
-    createData('Alex Johnson', '15-03-2025', '20-03-2025', 'Sick_Note.pdf', 'Sick Leave', 'Pending', 'Verification Needed', 'Surgeon'),
+    // createData('John Doe', '01-01-2025', '31-12-2025', 'Medical_Documents.pdf', 'Medical Leave', 'Absent', 'N/A', 'Nursing'),
+    // createData('Jane Smith', '05-02-2025', '10-02-2025', 'Leave_Request.pdf', 'Casual Leave', 'Approved', 'Urgent', 'Firing'),
+    // createData('Alex Johnson', '15-03-2025', '20-03-2025', 'Sick_Note.pdf', 'Sick Leave', 'Pending', 'Verification Needed', 'Surgeon'),
+    createData('NUR001', 'John Doe', 'Nursing', 'Absent', '31-12-2025'),
   ];
 
   const filteredRows = rows.filter(row => 
@@ -115,17 +116,14 @@ function Admintrainingattendance() {
         </Search>
         <br /><br />
         <TableContainer component={Paper} style={{ width: "90%", margin: "auto" }}>
-          <Table sx={{ minWidth: 800 }} aria-label="customized table">
+          <Table sx={{ minWidth: 600 }} aria-label="customized table">
             <TableHead>
               <TableRow>
                 <StyledTableCell>Employee_ID</StyledTableCell>
                 <StyledTableCell>Name</StyledTableCell>
                 <StyledTableCell>Department</StyledTableCell>
-                <StyledTableCell>Position</StyledTableCell>
-                <StyledTableCell>Email_ID</StyledTableCell>
                 <StyledTableCell>Attendance</StyledTableCell>
                 <StyledTableCell>Date</StyledTableCell>
-                <StyledTableCell>Category</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -135,11 +133,8 @@ function Admintrainingattendance() {
                     <StyledTableCell>{row.Employee_Id}</StyledTableCell>
                     <StyledTableCell>{row.Name}</StyledTableCell>
                     <StyledTableCell>{row.Department}</StyledTableCell>
-                    <StyledTableCell>{row.Position}</StyledTableCell>
-                    <StyledTableCell>{row.Email_ID}</StyledTableCell>
                     <StyledTableCell>{row.Attendance}</StyledTableCell>
                     <StyledTableCell>{row.Date}</StyledTableCell>
-                    <StyledTableCell>{row.Category}</StyledTableCell>
                   </StyledTableRow>
                 ))
               ) : (

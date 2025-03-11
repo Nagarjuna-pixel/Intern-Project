@@ -63,6 +63,9 @@ const ApplyResignation = () => {
     reason: "",
   });
 
+ const [userName] = useState(sessionStorage.getItem("userName"));
+ const [userId] = useState(sessionStorage.getItem("userId"));
+
   const handleResignInputChange = (e) => {
     const { name, value } = e.target;
     setResignForm({ ...resignationForm, [name]: value });
@@ -88,6 +91,7 @@ const ApplyResignation = () => {
                   placeholder="Enter Name"
                   fullWidth
                   size="small"
+                  value={userName}
                   onChange={handleResignInputChange}
                 />
               </Grid>
@@ -98,6 +102,7 @@ const ApplyResignation = () => {
                   placeholder="Enter Employee ID"
                   fullWidth
                   size="small"
+                  value={userId}
                   onChange={handleResignInputChange}
                 />
               </Grid>
@@ -122,49 +127,28 @@ const ApplyResignation = () => {
                 />
               </Grid>
               {/* <Grid><FormLabel>Notice Period</FormLabel></Grid> */}
-              <Grid item xs={6} md={6}>
-                <FormLabel>From Date</FormLabel>
-                <OutlinedInput
-                  type="date"
-                  name="fromDate"
-                  fullWidth
-                  onChange={handleResignInputChange}
-                />
-              </Grid>
+              
               <Grid item xs={12} md={6}>
-                <FormLabel>Session</FormLabel>
+                <FormLabel>Notice Period</FormLabel>
                 <Select
                   name="leaveType"
                   value={resignationForm.leaveType}
                   onChange={handleResignInputChange}
                   fullWidth
                 >
-                  <MenuItem value="">Select Session</MenuItem>
-                  <MenuItem value="Forenoon">Forenoon</MenuItem>
-                  <MenuItem value="Afternoon">Afternoon</MenuItem>
+                  <MenuItem value=""> </MenuItem>
+                  <MenuItem value="Forenoon">24hrs</MenuItem>
+                  <MenuItem value="Afternoon">one month</MenuItem>
                 </Select>
-              </Grid>
-              <Grid item xs={6}>
-                <FormLabel>To Date</FormLabel>
-                <OutlinedInput
-                  type="date"
-                  name="toDate"
-                  fullWidth
-                  onChange={handleResignInputChange}
-                />
               </Grid>
               <Grid item xs={12} md={6}>
-                <FormLabel>Session</FormLabel>
-                <Select
-                  name="leaveType"
-                  value={resignationForm.leaveType}
-                  onChange={handleResignInputChange}
+                <FormLabel>Date to be revealed</FormLabel>
+                <OutlinedInput
+                  name="datetoberevealed"
                   fullWidth
-                >
-                  <MenuItem value="">Select Session</MenuItem>
-                  <MenuItem value="Forenoon">Forenoon</MenuItem>
-                  <MenuItem value="Afternoon">Afternoon</MenuItem>
-                </Select>
+                  size="small"
+                  onChange={handleResignInputChange}
+                />
               </Grid>
               <Grid item xs={12}>
                 <FormLabel>Reason</FormLabel>

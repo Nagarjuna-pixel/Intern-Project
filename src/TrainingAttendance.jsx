@@ -38,16 +38,16 @@ const TrainingAttendance = () => {
     },
   }));
   
-  function createData(name, attendance , date, trainingCategory) {
-    return { name, attendance, date, trainingCategory};
+  function createData( date, trainingCategory,  attendance ,) {
+    return { date, trainingCategory, attendance,};
   }
   
   const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
+    createData( '04-03-25', 'Induction Program', 'Present',  ),
+    createData(  '05-03-25', 'On-Job-Training', 'Absent', ),
+    createData('06-03-25', 'Softskills Training',  'Present', ),
+    createData( '07-03-25', 'Customixed skills', 'Absent', ),
+    createData( '08-03-25', 'On Job Training', 'Present', ),
   ];
 
   const handleClickOutside = (event) => {
@@ -100,19 +100,17 @@ const TrainingAttendance = () => {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Name</StyledTableCell>
-            <StyledTableCell align="right">Attendance</StyledTableCell>
             <StyledTableCell align="right">Date</StyledTableCell>
             <StyledTableCell align="right">Training Category</StyledTableCell>
+            <StyledTableCell align="right">Attendance</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <StyledTableRow key={row.name}>
-              <StyledTableCell align="right">{row.name}</StyledTableCell>
-              <StyledTableCell align="right">{row.attendance}</StyledTableCell>
               <StyledTableCell align="right">{row.date}</StyledTableCell>
               <StyledTableCell align="right">{row.trainingCategory}</StyledTableCell>
+              <StyledTableCell align="right">{row.attendance}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

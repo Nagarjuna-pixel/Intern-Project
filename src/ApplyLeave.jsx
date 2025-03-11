@@ -61,6 +61,8 @@ const ApplyLeave = () => {
     medicalCertificate: null,
   });
 
+   const [userName] = useState(sessionStorage.getItem("userName"));
+   const [userId] = useState(sessionStorage.getItem("userId"));
   const fileInputRef = useRef();
 
   const handleLeaveInputChange = (e) => {
@@ -148,7 +150,9 @@ const ApplyLeave = () => {
                   name="name"
                   placeholder="Enter Name"
                   fullWidth
+                  value={userName}
                   size="small"
+
                   onChange={handleLeaveInputChange}
                 />
               </Grid>
@@ -159,6 +163,7 @@ const ApplyLeave = () => {
                   placeholder="Enter Employee ID"
                   fullWidth
                   size="small"
+                  value={userId}
                   onChange={handleLeaveInputChange}
                 />
               </Grid>

@@ -18,6 +18,8 @@ const darkTheme = createTheme({
   },
 });
 
+
+
 const FormContainer = styled("div")({
   display: "flex",
   flexDirection: "column",
@@ -49,6 +51,7 @@ const TrainingFeedback = () => {
   });
 
   const [value, setValue] = React.useState(dayjs('2022-04-17T15:30'));
+   const [userName] = useState(sessionStorage.getItem("userName"));
 
   const handlePostClick = () => {
     navigate('/usertrainingfeedbackhistory'); // This will navigate to the /admin-posttraining route
@@ -69,17 +72,18 @@ const TrainingFeedback = () => {
       <Navbar />
       <FormContainer>
         <FormBox>
-          <h1 style={{ color: "#ec2e2e" }}>Training Feedback</h1>
+          <h1 style={{ color: "#ec2e2e" }}>Training Feedback</h1><br />
           <form onSubmit={handleSubmit}>
             <Grid container spacing={3}>
               
               <Grid item xs={12} md={6}>
-                <FormLabel>Employee ID</FormLabel>
+                <FormLabel>Name</FormLabel>
                 <OutlinedInput
-                  name="employeeId"
-                  placeholder="Enter Employee ID"
+                  name="name"
+                  placeholder="Enter Name"
                   fullWidth
                   size="small"
+                  value={userName}
                   onChange={handletrainingfeedbackChange}
                 />
               </Grid>
@@ -94,19 +98,13 @@ const TrainingFeedback = () => {
                 />
               </Grid>
              <Grid item xs={12} md={6}>
-                                           <FormLabel>Training Type</FormLabel>
-                                           <Select
-                                               name="trainingtype"
-                                               value={leaveForm.leaveType}
-                                               onChange={handletrainingfeedbackChange}
-                                               fullWidth
-                                           >
-                                               <MenuItem value="">Select Leave Type</MenuItem>
-                                               <MenuItem value="Casual Leave">Casual Leave</MenuItem>
-                                               <MenuItem value="Earned Leave">Earned Leave</MenuItem>
-                                               <MenuItem value="Medical Leave">Medical Leave</MenuItem>
-                                               <MenuItem value="On Duty Leave">On Duty Leave</MenuItem>
-                                           </Select>
+              <FormLabel>Training Type</FormLabel>
+                                  <Select name="trainingtype" fullWidth>
+                                    <MenuItem value="">Select Training Type</MenuItem>
+                                    <MenuItem value="Induction Program">Induction Program</MenuItem>
+                                  <MenuItem value="On Job Training">On Job Training</MenuItem>
+                                   <MenuItem value="Customized/Softskills Training">Customized/Softskills Training</MenuItem>
+                                 </Select>                                          
                                        </Grid>
                                        <Grid item xs={6} md={6}>
                                            <FormLabel>Date</FormLabel>
@@ -129,10 +127,10 @@ const TrainingFeedback = () => {
   </LocalizationProvider>
 </Grid>
               <Grid item xs={12}>
-                <FormLabel>Reason</FormLabel>
+                <FormLabel>Feedback about the Training</FormLabel>
                 <OutlinedInput
-                  name="reason"
-                  placeholder="Enter Reason"
+                  name="Feedback"
+                  placeholder="Enter Feedback"
                   fullWidth
                   multiline
                   rows={3}

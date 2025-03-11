@@ -1,7 +1,179 @@
-import React, { useState } from "react";
+// import React, { useState } from 'react';
+// import './AdminDashboard.css';
+// import Dashboard from './Dashboard_sidebar.jsx';
+// import AdminNavbar from './AdminNavbar.jsx';
+// import { styled } from '@mui/material/styles';
+// import Table from '@mui/material/Table';
+// import TableBody from '@mui/material/TableBody';
+// import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+// import TableContainer from '@mui/material/TableContainer';
+// import TableHead from '@mui/material/TableHead';
+// import TableRow from '@mui/material/TableRow';
+// import Paper from '@mui/material/Paper';
+// import InputBase from '@mui/material/InputBase';
+// import SearchIcon from '@mui/icons-material/Search';
+// import Button from '@mui/material/Button';
+// import Checkbox from '@mui/material/Checkbox';
+// import { useNavigate } from 'react-router-dom';
+
+// function Adminleaverequest() {
+//   const [searchQuery, setSearchQuery] = useState("");
+//   const [selectedRows, setSelectedRows] = useState([]);
+//   const [selectAll, setSelectAll] = useState(false);
+//   const navigate = useNavigate();
+
+//   const handlePostClick = () => {
+//     navigate('/Adminleavehistory');
+//   };
+
+//   const StyledTableCell = styled(TableCell)(({ theme }) => ({
+//     [`&.${tableCellClasses.head}`]: {
+//       backgroundColor: theme.palette.common.black,
+//       color: theme.palette.common.white,
+//       textAlign: "center",
+//       fontWeight: "bold",
+//       padding: "10px",
+//     },
+//     [`&.${tableCellClasses.body}`]: {
+//       fontSize: 14,
+//       textAlign: "center",
+//       padding: "10px",
+//     },
+//   }));
+
+//   const StyledTableRow = styled(TableRow)(({ theme }) => ({
+//     '&:nth-of-type(odd)': {
+//       backgroundColor: theme.palette.action.hover,
+//     },
+//   }));
+
+//   function createData(Employee_Id, Name, Department, Email_ID, leave_category, StartDate, Starting_Session, endDate, end_Session, reason) {
+//     return { Employee_Id, Name, Department, Email_ID, leave_category, StartDate, Starting_Session, endDate, end_Session, reason };
+//   }
+
+//   const rows = [
+//     createData('001', 'John', 'Surgical', 'johnwick@gmail.com', 'Casual Leave', '18-02-25', 'Forenoon', '20-02-25', 'Afternoon', 'Function'),
+//     createData('002', 'Leodas', 'Firing', 'Leodas@gmail.com', 'Medical Leave', '17-02-25', 'Forenoon', '19-02-25', 'Afternoon', 'Fever'),
+//   ];
+
+//   const filteredRows = rows.filter(row => 
+//     Object.values(row).some(value => 
+//       value.toString().toLowerCase().includes(searchQuery.toLowerCase())
+//     )
+//   );
+
+//   const handleCheckboxChange = (Employee_Id) => {
+//     setSelectedRows((prevSelected) =>
+//       prevSelected.includes(Employee_Id)
+//         ? prevSelected.filter((id) => id !== Employee_Id)
+//         : [...prevSelected, Employee_Id]
+//     );
+//   };
+
+//   const handleSelectAll = () => {
+//     if (selectAll) {
+//       setSelectedRows([]);
+//     } else {
+//       setSelectedRows(filteredRows.map(row => row.Employee_Id));
+//     }
+//     setSelectAll(!selectAll);
+//   };
+
+//   return (
+//     <> 
+//       <Dashboard /> 
+//       <AdminNavbar /> 
+//       <div style={{ padding: "15px", marginLeft: "260px", paddingTop: "100px" }}>
+//         <h2 style={{ textAlign: "center", color: "#ec2e2e" }}>Leave Request</h2>
+//         <br /><br />
+//         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginRight: '50px' }}>
+//           <Button variant="contained" onClick={handleSelectAll}>
+//             {selectAll ? "Deselect All" : "Select All"}
+//           </Button>
+//           <InputBase
+//             placeholder="Search…"
+//             inputProps={{ 'aria-label': 'search' }}
+//             value={searchQuery}
+//             onChange={(e) => setSearchQuery(e.target.value)}
+//             startAdornment={<SearchIcon style={{ marginRight: 5 }} />}
+//             style={{ border: "1px solid black", padding: "5px 10px", borderRadius: "5px" }}
+//           />
+//         </div>
+//         <br /><br />
+//         <TableContainer component={Paper} style={{ width: "100%", overflowX: "auto" }}>
+//           <Table sx={{ minWidth: 800 }} stickyHeader aria-label="customized table">
+//             <TableHead>
+//               <TableRow>
+//                 <StyledTableCell style={{ minWidth: "50px" }}>
+//                   <Checkbox 
+//                     checked={selectAll} 
+//                     onChange={handleSelectAll} 
+//                   />
+//                 </StyledTableCell>
+//                 <StyledTableCell style={{ minWidth: "100px" }}>Employee_ID</StyledTableCell>
+//                 <StyledTableCell style={{ minWidth: "150px" }}>Name</StyledTableCell>
+//                 <StyledTableCell style={{ minWidth: "150px" }}>Department</StyledTableCell>
+//                 <StyledTableCell style={{ minWidth: "200px" }}>Email_ID</StyledTableCell>
+//                 <StyledTableCell style={{ minWidth: "150px" }}>Leave Category</StyledTableCell>
+//                 <StyledTableCell style={{ minWidth: "150px" }}>Start Date</StyledTableCell>
+//                 <StyledTableCell style={{ minWidth: "150px" }}>Starting Session</StyledTableCell>
+//                 <StyledTableCell style={{ minWidth: "150px" }}>End Date</StyledTableCell>
+//                 <StyledTableCell style={{ minWidth: "150px" }}>End Session</StyledTableCell>
+//                 <StyledTableCell style={{ minWidth: "200px" }}>Reason</StyledTableCell>
+//               </TableRow>
+//             </TableHead>
+//             <TableBody>
+//               {filteredRows.length > 0 ? (
+//                 filteredRows.map((row) => (
+//                   <StyledTableRow key={row.Employee_Id}>
+//                     <StyledTableCell>
+//                       <Checkbox
+//                         checked={selectedRows.includes(row.Employee_Id)}
+//                         onChange={() => handleCheckboxChange(row.Employee_Id)}
+//                       />
+//                     </StyledTableCell>
+//                     <StyledTableCell>{row.Employee_Id}</StyledTableCell>
+//                     <StyledTableCell>{row.Name}</StyledTableCell>
+//                     <StyledTableCell>{row.Department}</StyledTableCell>
+//                     <StyledTableCell>{row.Email_ID}</StyledTableCell>
+//                     <StyledTableCell>{row.leave_category}</StyledTableCell>
+//                     <StyledTableCell>{row.StartDate}</StyledTableCell>
+//                     <StyledTableCell>{row.Starting_Session}</StyledTableCell>
+//                     <StyledTableCell>{row.endDate}</StyledTableCell>
+//                     <StyledTableCell>{row.end_Session}</StyledTableCell>
+//                     <StyledTableCell>{row.reason}</StyledTableCell>
+//                   </StyledTableRow>
+//                 ))
+//               ) : (
+//                 <StyledTableRow>
+//                   <StyledTableCell colSpan={11} style={{ textAlign: 'center' }}>No results found</StyledTableCell>
+//                 </StyledTableRow>
+//               )}
+//             </TableBody>
+//           </Table>
+//         </TableContainer>
+//         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: "20px", marginRight: "50px" }}>
+//           <Button variant="contained" style={{ backgroundColor: 'green', color: 'white', marginRight: "10px" }}>
+//             Accepted
+//           </Button>
+//           <Button variant="contained" style={{ backgroundColor: 'red', color: 'white' }}>
+//             Rejected
+//           </Button>
+//         </div>
+//       </div>
+//       <Button variant="contained" className="fixed-button" style={{ marginTop: "-200px" }} onClick={handlePostClick}>
+//         Leave History
+//       </Button>
+//     </>
+//   );
+// }
+
+// export default Adminleaverequest;
+
+import React, { useState } from 'react';
 import './AdminDashboard.css';
+import Dashboard from './Dashboard_sidebar.jsx';
 import AdminNavbar from './AdminNavbar.jsx';
-import Dashboard from "./Dashboard_sidebar.jsx";
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,52 +182,17 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
+import Button from '@mui/material/Button';
+//import Checkbox from '@mui/material/Checkbox';
+import { useNavigate } from 'react-router-dom';
 
 function Admintrainingfeedbackhistory() {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery] = useState("");
+  const navigate = useNavigate();
 
-  const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: theme.palette.primary.main,
-    '&:hover': {
-      backgroundColor: theme.palette.primary.dark,
-    },
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(-100),
-      width: 'auto',
-    },
-  }));
-
-  const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }));
-
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    width: '100%',
-    '& .MuiInputBase-input': {
-      padding: theme.spacing(1, 1, 1, 0),
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create('width'),
-      [theme.breakpoints.up('sm')]: {
-        width: '12ch',
-        '&:focus': {
-          width: '20ch',
-        },
-      },
-    },
-  }));
+  const handlePostClick = () => {
+    navigate('/Adminleavehistory');
+  };
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -63,10 +200,12 @@ function Admintrainingfeedbackhistory() {
       color: theme.palette.common.white,
       textAlign: "center",
       fontWeight: "bold",
+      padding: "10px",
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
       textAlign: "center",
+      padding: "10px",
     },
   }));
 
@@ -74,78 +213,86 @@ function Admintrainingfeedbackhistory() {
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,
     },
-    '&:last-child td, &:last-child th': {
-      border: 0,
-    },
   }));
 
-  function createData(Name, Training_Type,  Trainer_Name, Date, time, feedback) {
-    return { Name, Training_Type, Trainer_Name, Date,  time, feedback};
+  function createData(Trainer_Name, Training_Session_No, Training_Type,Topic_Name, Designation, Designation_Department, Date, time) {
+    return { Trainer_Name, Training_Session_No, Training_Type, Topic_Name, Designation, Designation_Department, Date, time};
   }
 
   const rows = [
-    createData('Leodas','Surgical', 'Anthonydas','18-02-25', '9.00AM', 'Good' ),
-    createData('Leodas', 'Firing', 'Harolddas', '17-02-25', '11.00AM', 'Good'),
+    createData('Leodas','SUR001','Induction_Program', 'Anthonydas','Surging the heart in the body', 'Teaching', 'Surgical','18-02-25', '9.00AM',  ),
+    createData('Rolex', 'FIRE001', 'OnJobTraining', 'Harolddas', 'Removing the fire', 'Firing', 'Fire Extinguishing', '17-02-25', '11.00AM',),
   ];
 
-  const filteredRows = rows.filter(row => 
-    Object.values(row).some(value => 
+
+  const filteredRows = rows.filter(row =>
+    Object.values(row).some(value =>
       value.toString().toLowerCase().includes(searchQuery.toLowerCase())
     )
   );
 
   return (
     <>
+      <Dashboard />
       <AdminNavbar />
-      <Dashboard/>
-      <div style={{ padding: "100px", marginLeft: "200px", paddingTop: "100px" }}>
+      <div style={{ padding: "15px", marginLeft: "260px", paddingTop: "100px" }}>
         <h2 style={{ textAlign: "center", color: "#ec2e2e" }}>Training Feedback History</h2>
         <br /><br />
-        <Search style={{ width:"200px", marginLeft:"1000px", marginTop:"-30px", borderColor:"black" }}>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
+        {/* <div style={{ display: 'flex', justifyContent: 'space-between', marginRight: '50px' }}>
+          <Button variant="contained" onClick={handleSelectAll}>
+            {selectAll ? "Deselect All" : "Select All"}
+          </Button>
+          <InputBase
             placeholder="Search…"
             inputProps={{ 'aria-label': 'search' }}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            startAdornment={<SearchIcon style={{ marginRight: 5 }} />}
+            style={{ border: "1px solid black", padding: "5px 10px", borderRadius: "5px" }}
           />
-        </Search>
+        </div> */}
         <br /><br />
-        <TableContainer component={Paper} style={{ width: "90%", margin: "auto" }}>
-          <Table sx={{ minWidth: 800 }} aria-label="customized table">
+        <TableContainer component={Paper} style={{ width: "100%", overflowX: "auto" }}>
+          <Table sx={{ minWidth: 900 }} stickyHeader aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell>Name</StyledTableCell>
+              <StyledTableCell>Trainer Name</StyledTableCell>
+                <StyledTableCell>Training Session No</StyledTableCell>
                 <StyledTableCell>Training Type</StyledTableCell>
-                <StyledTableCell>Trainer Name</StyledTableCell>
+                <StyledTableCell>Topic Name</StyledTableCell>
+                <StyledTableCell>Designation</StyledTableCell>
+                <StyledTableCell>Designation Department</StyledTableCell>
                 <StyledTableCell>Date</StyledTableCell>
                 <StyledTableCell>Time</StyledTableCell>
-                <StyledTableCell>Feedback</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {filteredRows.length > 0 ? (
-                filteredRows.map((row, index) => (
-                  <StyledTableRow key={index}>
-                    <StyledTableCell>{row.Name}</StyledTableCell>
-                    <StyledTableCell>{row.Training_Type}</StyledTableCell>
+                filteredRows.map((row) => (
+                  <StyledTableRow key={row.Employee_Id}>
                     <StyledTableCell>{row.Trainer_Name}</StyledTableCell>
+                    <StyledTableCell>{row.Training_Session_No}</StyledTableCell>
+                    <StyledTableCell>{row.Training_Type}</StyledTableCell>
+                    <StyledTableCell>{row.Topic_Name}</StyledTableCell>
+                    <StyledTableCell>{row.Designation}</StyledTableCell>
+                    <StyledTableCell>{row.Designation_Department}</StyledTableCell>
                     <StyledTableCell>{row.Date}</StyledTableCell>
                     <StyledTableCell>{row.time}</StyledTableCell>
-                    <StyledTableCell>{row.feedback}</StyledTableCell>
                   </StyledTableRow>
                 ))
               ) : (
                 <StyledTableRow>
-                  <StyledTableCell colSpan={8} style={{ textAlign: 'center' }}>No results found</StyledTableCell>
+                  <StyledTableCell colSpan={12} style={{ textAlign: 'center' }}>No results found</StyledTableCell>
                 </StyledTableRow>
               )}
             </TableBody>
+
           </Table>
         </TableContainer>
       </div>
+      <Button variant="contained" className="fixed-button" style={{ marginTop: "-100px" }} onClick={handlePostClick}>
+        Leave History
+      </Button>
     </>
   );
 }
